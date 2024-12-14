@@ -1,5 +1,9 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using MVCTestApp.Data;
 
+var builder = WebApplication.CreateBuilder(args);
+var conn = builder.Configuration.GetConnectionString("ConstrucctionDBConnection");
+builder.Services.AddDbContext<ConstructionDbContext>(q => q.UseSqlServer(conn));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
