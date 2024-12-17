@@ -9,23 +9,22 @@ using MVCTestApp.Data;
 
 namespace MVCTestApp.Controllers
 {
-    public class ConstructionProjectController : Controller
+    public class ConstructionStaffsController : Controller
     {
         private readonly ConstructionDbContext _context;
 
-        public ConstructionProjectController(ConstructionDbContext context)
+        public ConstructionStaffsController(ConstructionDbContext context)
         {
             _context = context;
         }
 
-        // GET: ConstructionProject
+        // GET: ConstructionStaffs
         public async Task<IActionResult> Index()
         {
-            // Uses an object of ConstructionDBContext, which can query the ConstructionProject table
-            return View(await _context.ConstructionProjects.ToListAsync());
+            return View(await _context.ConstructionStaffs.ToListAsync());
         }
 
-        // GET: ConstructionProject/Details/5
+        // GET: ConstructionStaffs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +32,39 @@ namespace MVCTestApp.Controllers
                 return NotFound();
             }
 
-            var constructionProject = await _context.ConstructionProjects
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (constructionProject == null)
+            var constructionStaff = await _context.ConstructionStaffs
+                .FirstOrDefaultAsync(m => m.StaffId == id);
+            if (constructionStaff == null)
             {
                 return NotFound();
             }
 
-            return View(constructionProject);
+            return View(constructionStaff);
         }
 
-        // GET: ConstructionProject/Create
+        // GET: ConstructionStaffs/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ConstructionProject/Create
+        // POST: ConstructionStaffs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProjectName,ProjectDetails,ProjectLocation,ProjectStatus,ProjectDateCompletion")] ConstructionProject constructionProject)
+        public async Task<IActionResult> Create([Bind("StaffId,FirstName,LastName,JobTitle,EmploymentStatus,DateOfHire")] ConstructionStaff constructionStaff)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(constructionProject);
+                _context.Add(constructionStaff);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(constructionProject);
+            return View(constructionStaff);
         }
 
-        // GET: ConstructionProject/Edit/5
+        // GET: ConstructionStaffs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +72,22 @@ namespace MVCTestApp.Controllers
                 return NotFound();
             }
 
-            var constructionProject = await _context.ConstructionProjects.FindAsync(id);
-            if (constructionProject == null)
+            var constructionStaff = await _context.ConstructionStaffs.FindAsync(id);
+            if (constructionStaff == null)
             {
                 return NotFound();
             }
-            return View(constructionProject);
+            return View(constructionStaff);
         }
 
-        // POST: ConstructionProject/Edit/5
+        // POST: ConstructionStaffs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProjectName,ProjectDetails,ProjectLocation,ProjectStatus,ProjectDateCompletion")] ConstructionProject constructionProject)
+        public async Task<IActionResult> Edit(int id, [Bind("StaffId,FirstName,LastName,JobTitle,EmploymentStatus,DateOfHire")] ConstructionStaff constructionStaff)
         {
-            if (id != constructionProject.Id)
+            if (id != constructionStaff.StaffId)
             {
                 return NotFound();
             }
@@ -97,12 +96,12 @@ namespace MVCTestApp.Controllers
             {
                 try
                 {
-                    _context.Update(constructionProject);
+                    _context.Update(constructionStaff);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ConstructionProjectExists(constructionProject.Id))
+                    if (!ConstructionStaffExists(constructionStaff.StaffId))
                     {
                         return NotFound();
                     }
@@ -113,10 +112,10 @@ namespace MVCTestApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(constructionProject);
+            return View(constructionStaff);
         }
 
-        // GET: ConstructionProject/Delete/5
+        // GET: ConstructionStaffs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +123,34 @@ namespace MVCTestApp.Controllers
                 return NotFound();
             }
 
-            var constructionProject = await _context.ConstructionProjects
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (constructionProject == null)
+            var constructionStaff = await _context.ConstructionStaffs
+                .FirstOrDefaultAsync(m => m.StaffId == id);
+            if (constructionStaff == null)
             {
                 return NotFound();
             }
 
-            return View(constructionProject);
+            return View(constructionStaff);
         }
 
-        // POST: ConstructionProject/Delete/5
+        // POST: ConstructionStaffs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var constructionProject = await _context.ConstructionProjects.FindAsync(id);
-            if (constructionProject != null)
+            var constructionStaff = await _context.ConstructionStaffs.FindAsync(id);
+            if (constructionStaff != null)
             {
-                _context.ConstructionProjects.Remove(constructionProject);
+                _context.ConstructionStaffs.Remove(constructionStaff);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ConstructionProjectExists(int id)
+        private bool ConstructionStaffExists(int id)
         {
-            return _context.ConstructionProjects.Any(e => e.Id == id);
+            return _context.ConstructionStaffs.Any(e => e.StaffId == id);
         }
     }
 }
