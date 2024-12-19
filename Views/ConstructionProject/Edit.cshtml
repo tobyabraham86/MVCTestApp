@@ -18,35 +18,42 @@
                 <input asp-for="ProjectName" class="form-control" />
                 <span asp-validation-for="ProjectName" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="ProjectDetails" class="control-label"></label>
                 <input asp-for="ProjectDetails" class="form-control" />
                 <span asp-validation-for="ProjectDetails" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="ProjectLocation" class="control-label"></label>
                 <input asp-for="ProjectLocation" class="form-control" />
                 <span asp-validation-for="ProjectLocation" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="ProjectStatus" class="control-label"></label>
                 <input asp-for="ProjectStatus" class="form-control" />
                 <span asp-validation-for="ProjectStatus" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="ProjectDateCompletion" class="control-label"></label>
                 <input asp-for="ProjectDateCompletion" class="form-control" />
                 <span asp-validation-for="ProjectDateCompletion" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-dark">Back to List</a>
             </div>
+            <br><br>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    
 </div>
 
 @section Scripts {
